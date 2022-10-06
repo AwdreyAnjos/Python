@@ -5,63 +5,53 @@ os.system('cls' if os.name == 'nt' else 'clear'); # para limpar o terminal
 # cls para windows 
 # clear para linux
 
-print("              ------------------------------------");
-print("              | BEM VINDO AO JOGO DE ADIVINHAÇÃO |");
-print("              ------------------------------------\n");
+print("\t------------------------------------");
+print("\t| BEM VINDO AO JOGO DE ADIVINHAÇÃO |");
+print("\t------------------------------------\n");
 
-print("------------------ ESCOLHA SUA DIFICULDADE ------------------\n")
-f = 10;
-m = 20;
-d = 50;
-print(" ---------> f (FACIL) | m (MEDIO) | d (DIFICIL) <------------\n");
+print("\t----- ESCOLHA SUA DIFICULDADE -----\n")
+
+print("\tf (FACIL) | m (MEDIO) | d (DIFICIL)\n");
 
 x = False
 
-while (x == False): # Escolhendo dificuldade do sorteio
-    escolha = input("----------> ");
-    x = escolha;
-    if (escolha == "f"): # nivel facil - random  1 ao 10
-        numero_secreto = random.randint(1,f);
-        x = True
-    elif (escolha == "m"): # nivel medio - random 1 ao 20
-        numero_secreto = random.randint(1,m);
-        x = True
-    elif (escolha == "d"): # nivel dificil - random 1 ao 50
-        numero_secreto = random.randint(1,d);
-        x = True
+while True: # Escolhendo dificuldade do sorteio
+    escolha = input("\t----> ").upper(); #Deixa todas as letras em maiusculo
+    if (dificuldades.get(escolha,None) != None): #Procura a letra que usuario adicionou no dicionario das
+        limite = dificuldades.get(escolha)
+        numero_secreto = random.randint(1,limite);
+        break
     else:
-        print("\n------------- DIFICULDADE NÃO ENCONTRADA ---------------");
-        print("------------------ TENTE NOVAMENTE -----------------\n")
-        x = False
-
+        print("\n\t--- DIFICULDADE NÃO ENCONTRADA ---");
+        print("\t--------- TENTE NOVAMENTE --------\n");
 
 for i in range(3): # for que vai rodar até o número de tentativas acabar
 
-    numero_usuario = int(input("\nDigite seu número da sorte --> "));
+    numero_usuario = int(input("\n\tDigite seu número da sorte --> "));
 
-    if i >= 2: #caso o usuário erre todas as tentativas 
-        print("\n                »»»»»»»»»»»»»»»»»»»");
-        print("                 NÃO FOI DESSA VEZ!");
-        print("                »»»»»»»»»»»»»»»»»»»");
-        print("           O NÚMERO SORTEADO ERA ------> {}\n".format( numero_secreto));
+    if (i >= 2): #caso o usuário erre todas as tentativas 
+        print("\n\t»»»»»»»»»»»»»»»»»»»");
+        print("\tNÃO FOI DESSA VEZ!");
+        print("\t»»»»»»»»»»»»»»»»»»»");
+        print("\tO NÚMERO SORTEADO ERA -> {}\n".format( numero_secreto));
 
     elif (numero_usuario == numero_secreto): #caso o usuário acerte
-        print("\n                ***********************");
-        print("                PARABÉNS VOCÊ ACERTOU!!");
-        print("                ***********************");
+        print("\n\t***********************");
+        print("\tPARABÉNS VOCÊ ACERTOU!!");
+        print("\t***********************");
         break
 
     elif (numero_secreto < numero_usuario): #caso não esteja certo e seja maior que o sorteado
-        print("\n        ======================================");
-        print("          ERRADO, TEM MAIS {} DE 3 TENTATIVAS".format(i+1));
-        print("\n             TENTE UM NÚMERO MAIS BAIXO");
-        print("        ======================================");
+        print("\n\t======================================");
+        print("\tERRADO, TEM MAIS {} DE 3 TENTATIVAS".format(i+1));
+        print("\n\tTENTE UM NÚMERO MAIS BAIXO");
+        print("\t======================================");
 
     elif (numero_secreto > numero_usuario): #caso não esteja certo e seja menor que o sorteado
-        print("\n        ======================================");
-        print("          ERRADO, TEM MAIS {} DE 3 TENTATIVAS".format(i+1));
-        print("\n               TENTE UM NÚMERO MAIS ALTO");
-        print("        ======================================");
+        print("\n\t======================================");
+        print("\tERRADO, TEM MAIS {} DE 3 TENTATIVAS".format(i+1));
+        print("\n\tTENTE UM NÚMERO MAIS ALTO");
+        print("\t======================================");
 
 
 
